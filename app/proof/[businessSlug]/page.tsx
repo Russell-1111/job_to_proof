@@ -1,28 +1,44 @@
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { ArrowRight, CalendarCheck, CheckCircle2, MapPin, ShieldCheck, Sparkles } from "lucide-react";
 import { BeforeAfter } from "@/components/BeforeAfter";
 import { PageShell } from "@/components/PageShell";
-import { DetailImagePair, detailImages } from "@/lib/demoContent";
+import { demoBusinesses, getDemoBusiness } from "@/lib/demoBusinesses";
 
-const jobs = [
-  {
-    title: "Pet hair cleanup for a daily driver SUV",
-    detail: "Interior reset focused on carpets, seat seams, and high-touch surfaces.",
-    images: detailImages.petHair
-  },
-  {
-    title: "Leather seat refresh before a family road trip",
-    detail: "Cleaned and conditioned leather so the seat looks cared for without a fake glossy finish.",
-    images: detailImages.leatherSeat
-  },
-  {
-    title: "Stain treatment and dashboard reset for a commuter car",
-    detail: "Dashboard, console, and cupholders wiped down for a cleaner daily-drive interior.",
-    images: detailImages.dashboard
+type ProofPageProps = {
+  params: Promise<{
+    businessSlug: string;
+  }>;
+};
+
+export function generateStaticParams() {
+  return Object.keys(demoBusinesses).map((businessSlug) => ({ businessSlug }));
+}
+
+export async function generateMetadata({ params }: ProofPageProps) {
+  const { businessSlug } = await params;
+  const business = getDemoBusiness(businessSlug);
+
+  if (!business) {
+    return {
+      title: "Proof page not found | JobToProof"
+    };
   }
-] satisfies Array<{ title: string; detail: string; images: DetailImagePair }>;
 
-export default function ProofPage() {
+  return {
+    title: `${business.name} proof page | JobToProof`,
+    description: business.description
+  };
+}
+
+export default async function ProofPage({ params }: ProofPageProps) {
+  const { businessSlug } = await params;
+  const business = getDemoBusiness(businessSlug);
+
+  if (!business) {
+    notFound();
+  }
+
   return (
     <PageShell>
       <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:py-12">
@@ -33,22 +49,20 @@ export default function ProofPage() {
                 <ShieldCheck className="size-4" aria-hidden="true" />
                 Shareable proof page
               </p>
-              <h1 className="text-4xl font-semibold leading-tight text-white sm:text-5xl">Elite Mobile Detailing</h1>
+              <h1 className="text-4xl font-semibold leading-tight text-white sm:text-5xl">{business.name}</h1>
               <div className="mt-4 flex flex-wrap gap-3 text-sm text-steel">
                 <span className="inline-flex items-center gap-2 rounded-md border border-white/10 px-3 py-2">
                   <MapPin className="size-4 text-gold" aria-hidden="true" />
-                  Austin, TX
+                  {business.location}
                 </span>
                 <span className="inline-flex items-center gap-2 rounded-md border border-white/10 px-3 py-2">
                   <CalendarCheck className="size-4 text-gold" aria-hidden="true" />
-                  Full Interior Detail
+                  {business.serviceType}
                 </span>
               </div>
-              <p className="mt-6 text-lg leading-8 text-steel">
-                A completed interior detail turned into a shareable page a mobile detailer could send when a new lead asks, "Can I see your work?"
-              </p>
+              <p className="mt-6 text-lg leading-8 text-steel">{business.description}</p>
               <div className="mt-5 grid gap-3 text-sm text-white sm:grid-cols-3">
-                {["Before/after photos", "Plain job summary", "Share-ready next step"].map((item) => (
+                {business.featureItems.map((item) => (
                   <span key={item} className="inline-flex items-center gap-2 rounded-md border border-white/10 bg-ink px-3 py-3">
                     <CheckCircle2 className="size-4 shrink-0 text-gold" aria-hidden="true" />
                     {item}
@@ -57,9 +71,7 @@ export default function ProofPage() {
               </div>
               <div className="mt-6 rounded-lg border border-white/10 bg-ink p-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.16em] text-gold">Demo proof content</p>
-                <p className="mt-3 text-sm leading-6 text-white/90">
-                  This sample uses demo photos and example copy to show the shareable page format. A real page would use the detailer's own job photos, review link, and booking link.
-                </p>
+                <p className="mt-3 text-sm leading-6 text-white/90">{business.demoNote}</p>
               </div>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                 <Link href="/early-access" className="inline-flex items-center justify-center rounded-md bg-gold px-5 py-3 font-semibold text-ink shadow-glow hover:bg-gold-soft">
@@ -71,7 +83,7 @@ export default function ProofPage() {
                 </Link>
               </div>
             </div>
-            <BeforeAfter {...detailImages.footwell} />
+            <BeforeAfter {...business.heroImages} priority />
           </div>
         </section>
 
@@ -110,7 +122,7 @@ export default function ProofPage() {
             </p>
           </div>
           <div className="mt-5 grid gap-4 md:grid-cols-3">
-            {jobs.map((job) => (
+            {business.jobs.map((job) => (
               <article key={job.title} className="surface rounded-lg p-4">
                 <div className="mb-4 overflow-hidden rounded-md border border-white/10">
                   <BeforeAfter {...job.images} compact />

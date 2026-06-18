@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
+import { featuredProofPath } from "@/lib/demoBusinesses";
 
 export function SiteHeader() {
   return (
@@ -12,7 +13,7 @@ export function SiteHeader() {
           <span>JobToProof</span>
         </Link>
         <nav className="flex items-center gap-1.5 text-sm text-steel sm:gap-2">
-          <Link className="hidden rounded-md px-3 py-2.5 hover:text-white md:inline-flex" href="/proof/elite-mobile-detailing">
+          <Link className="hidden rounded-md px-3 py-2.5 hover:text-white md:inline-flex" href={featuredProofPath}>
             Proof page
           </Link>
           <Link className="rounded-md border border-white/10 px-2.5 py-2.5 font-semibold text-white hover:border-gold/60 sm:px-3" href="/early-access">

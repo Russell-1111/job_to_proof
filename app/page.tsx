@@ -78,7 +78,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className="surface rounded-lg p-3 shadow-glow">
-            <BeforeAfter {...detailImages.footwell} />
+            <BeforeAfter {...detailImages.footwell} priority />
             <div className="mt-3 rounded-md border border-gold/20 bg-gold/10 p-4">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">Sample job becomes</p>
               <p className="mt-2 text-sm leading-6 text-white">

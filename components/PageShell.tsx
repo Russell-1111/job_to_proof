@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SiteHeader } from "@/components/SiteHeader";
+import { featuredProofPath } from "@/lib/demoBusinesses";
 
 export function PageShell({ children }: { children: React.ReactNode }) {
   return (
@@ -13,7 +14,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
             <Link className="rounded-md px-1 py-2.5 hover:text-white" href="/demo">
               Demo
             </Link>
-            <Link className="rounded-md px-1 py-2.5 hover:text-white" href="/proof/elite-mobile-detailing">
+            <Link className="rounded-md px-1 py-2.5 hover:text-white" href={featuredProofPath}>
               Proof page
             </Link>
             <Link className="rounded-md px-1 py-2.5 text-gold hover:text-gold-soft" href="/early-access">

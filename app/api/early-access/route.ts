@@ -89,10 +89,10 @@ export async function POST(request: Request) {
 
   if (error) {
     if (error.code === "23505") {
-      return NextResponse.json(
-        { message: "This email is already on the early access list." },
-        { status: 409 }
-      );
+      return NextResponse.json({
+        duplicate: true,
+        message: "This email is already on the early access list."
+      });
     }
 
     console.error("Early access lead insert failed", error);

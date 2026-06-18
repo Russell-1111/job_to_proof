@@ -34,10 +34,15 @@ export function EarlyAccessForm() {
         },
         body: JSON.stringify(payload)
       });
-      const result = (await response.json().catch(() => null)) as { message?: string } | null;
+      const result = (await response.json().catch(() => null)) as { duplicate?: boolean; message?: string } | null;
 
       if (!response.ok) {
         setMessage(result?.message ?? "We could not save your request. Please try again.");
+        return;
+      }
+
+      if (result?.duplicate) {
+        setMessage(result.message ?? "This email is already on the early access list.");
         return;
       }
 

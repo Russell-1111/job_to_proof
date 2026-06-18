@@ -29,7 +29,7 @@ export const defaultDemoValues: DemoFormValues = {
   customerType: "Busy car owner",
   jobDescription:
     "Full interior detail with pet hair removal, leather cleaning, stain treatment, and dashboard wipe-down.",
-  reviewLink: "https://example.com/review/elite-mobile-detailing"
+  reviewLink: "your-google-review-link"
 };
 
 export const detailImages = {
@@ -68,7 +68,7 @@ export function buildOutputs(values: DemoFormValues): OutputCard[] {
   const location = values.jobLocation || "your service area";
   const customer = values.customerType || "car owner";
   const description = values.jobDescription || "a completed detail";
-  const reviewLink = values.reviewLink || "https://example.com/review";
+  const reviewLink = values.reviewLink || "your-google-review-link";
 
   return [
     {
@@ -88,7 +88,7 @@ export function buildOutputs(values: DemoFormValues): OutputCard[] {
     {
       title: "Google review request",
       channel: "Review request",
-      text: `Hi, thanks again for choosing ${business} for your ${service}. If the interior feels fresh and the service was helpful, would you mind leaving a quick Google review here? ${reviewLink}`,
+      text: `Hi, thanks again for choosing ${business} for your ${service}. If the interior feels fresh and the service was helpful, would you mind leaving a quick Google review here? ${reviewLink}\n\nBefore sending, replace your-google-review-link with your own Google review link.`,
       why: "Makes the review ask polite, direct, and tied to the service the customer just received.",
       use: "Send manually after the customer has seen the finished vehicle."
     },

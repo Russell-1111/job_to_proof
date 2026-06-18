@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ChangeEvent, useMemo, useRef, useState } from "react";
 import { ArrowRight, Check, Copy, ImagePlus, MessageSquareText, Sparkles, Wand2 } from "lucide-react";
+import { featuredProofPath } from "@/lib/demoBusinesses";
 import { buildOutputs, defaultDemoValues, DemoFormValues, sampleAfterImage, sampleBeforeImage } from "@/lib/demoContent";
 
 function Field({
@@ -110,7 +111,7 @@ export function DemoClient() {
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">Sample job loaded</p>
             <h1 className="mt-2 text-3xl font-semibold leading-tight text-white sm:text-4xl">Turn one finished detail into proof you can copy</h1>
             <p className="mt-3 max-w-2xl text-sm leading-6 text-steel">
-              Tap generate to see the payoff immediately, or edit the prefilled job first.
+              Tap generate for the instant sample, or make a quick edit first. The form is already filled for a mobile interior detail.
             </p>
           </div>
           <span className="hidden rounded-md border border-gold/30 bg-gold/10 px-3 py-2 text-xs font-semibold uppercase tracking-[0.14em] text-gold sm:inline-flex">
@@ -131,6 +132,13 @@ export function DemoClient() {
             Generate sample proof
             <Wand2 className="size-4" aria-hidden="true" />
           </button>
+        </div>
+
+        <div className="mt-6">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">Optional edits</p>
+          <p className="mt-2 text-sm leading-6 text-steel">
+            For the fastest demo, leave these as-is and generate. Change only the details you want to see reflected in the copy.
+          </p>
         </div>
 
         <div className="mt-6 grid gap-4 sm:grid-cols-2">
@@ -155,6 +163,9 @@ export function DemoClient() {
             <Field label="Google review link">
               <input className={inputClass()} value={values.reviewLink} onChange={(event) => updateValue("reviewLink", event.target.value)} />
             </Field>
+            <p className="mt-2 text-xs leading-5 text-steel">
+              Demo placeholder only. Paste your own Google review link here before sending the generated request to a customer.
+            </p>
           </div>
         </div>
 
@@ -220,21 +231,6 @@ export function DemoClient() {
           </div>
         ) : (
           <div className="mt-6 grid gap-4">
-            <div className="rounded-lg border border-gold/25 bg-gold/10 p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">Next step</p>
-              <p className="mt-2 text-sm leading-6 text-white/90">
-                This is the core loop: finished job in, proof assets out. Check the sample proof page, then request early access if this would save time after real jobs.
-              </p>
-              <div className="mt-4 grid gap-2 sm:grid-cols-2">
-                <Link href="/proof/elite-mobile-detailing" className="inline-flex items-center justify-center gap-2 rounded-md bg-gold px-4 py-3 text-sm font-semibold text-ink hover:bg-gold-soft">
-                  View proof page
-                  <ArrowRight className="size-4" aria-hidden="true" />
-                </Link>
-                <Link href="/early-access" className="inline-flex items-center justify-center rounded-md border border-white/15 px-4 py-3 text-sm font-semibold text-white hover:border-gold/60">
-                  Join early access
-                </Link>
-              </div>
-            </div>
             <div className="grid grid-cols-2 gap-3 rounded-lg border border-white/10 bg-ink p-3">
               <div className="relative aspect-[4/3] overflow-hidden rounded-md">
                 <Image src={beforeSrc} alt="Generated proof before image preview" fill className="object-cover" unoptimized={beforeIsUpload} sizes="(min-width: 1024px) 25vw, 50vw" />
@@ -264,6 +260,21 @@ export function DemoClient() {
                 </p>
               </article>
             ))}
+            <div className="rounded-lg border border-white/10 bg-white/[0.03] p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">Next step</p>
+              <p className="mt-2 text-sm leading-6 text-steel">
+                This is the core loop: finished job in, proof assets out. Check the sample proof page, then request early access if this would save time after real jobs.
+              </p>
+              <div className="mt-4 grid gap-2 sm:grid-cols-2">
+                <Link href={featuredProofPath} className="inline-flex items-center justify-center gap-2 rounded-md bg-gold px-4 py-3 text-sm font-semibold text-ink hover:bg-gold-soft">
+                  View proof page
+                  <ArrowRight className="size-4" aria-hidden="true" />
+                </Link>
+                <Link href="/early-access" className="inline-flex items-center justify-center rounded-md border border-white/15 px-4 py-3 text-sm font-semibold text-white hover:border-gold/60">
+                  Join early access
+                </Link>
+              </div>
+            </div>
           </div>
         )}
       </section>
