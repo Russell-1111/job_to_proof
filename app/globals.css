@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  background: #09090b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background:
+    radial-gradient(circle at 18% -5%, rgba(245, 197, 66, 0.12), transparent 28rem),
+    radial-gradient(circle at 92% 10%, rgba(89, 211, 165, 0.08), transparent 24rem),
+    linear-gradient(180deg, #09090b 0%, #101012 46%, #09090b 100%);
+  color: #f7f7f8;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(245, 197, 66, 0.3);
+}
+
+.card-border {
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.gold-ring {
+  box-shadow: 0 0 0 1px rgba(245, 197, 66, 0.2), 0 24px 80px rgba(0, 0, 0, 0.32);
+}
+
+.surface {
+  background: linear-gradient(180deg, rgba(28, 28, 32, 0.96), rgba(14, 14, 17, 0.96));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
