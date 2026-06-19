@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { ChangeEvent, useMemo, useRef, useState } from "react";
 import { ArrowRight, Check, Copy, ImagePlus, MessageSquareText, Sparkles, Wand2 } from "lucide-react";
+import { BeforeAfter } from "@/components/BeforeAfter";
 import { featuredProofPath } from "@/lib/demoBusinesses";
 import { buildOutputs, defaultDemoValues, DemoFormValues, sampleAfterImage, sampleBeforeImage } from "@/lib/demoContent";
 
@@ -215,7 +216,7 @@ export function DemoClient() {
         <div className="flex items-center justify-between gap-4">
           <div>
             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-gold">Generated proof assets</p>
-            <h2 className="mt-2 text-2xl font-semibold text-white">{generated ? "Ready to copy and share" : "Your proof appears here"}</h2>
+            <h2 className="mt-2 text-2xl font-semibold text-white">{generated ? "Your shareable proof page is ready" : "Your proof appears here"}</h2>
           </div>
         </div>
 
@@ -231,14 +232,47 @@ export function DemoClient() {
           </div>
         ) : (
           <div className="mt-6 grid gap-4">
-            <div className="grid grid-cols-2 gap-3 rounded-lg border border-white/10 bg-ink p-3">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-md">
-                <Image src={beforeSrc} alt="Generated proof before image preview" fill className="object-cover" unoptimized={beforeIsUpload} sizes="(min-width: 1024px) 25vw, 50vw" />
+            <article className="rounded-lg border border-gold/30 bg-ink p-4 shadow-glow">
+              <div className="grid gap-4">
+                <div>
+                  <p className="mb-2 inline-flex items-center gap-2 rounded-md border border-gold/20 bg-gold/10 px-2 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-gold">
+                    Visual proof asset
+                  </p>
+                  <h3 className="text-xl font-semibold text-white">Your shareable proof page is ready</h3>
+                  <p className="mt-3 text-sm leading-6 text-steel">
+                    This is the asset that helps turn one finished job into trust for the next customer: a proof page with the job result, before/after images, and a clear next step.
+                  </p>
+                </div>
+
+                <div className="rounded-lg border border-white/10 bg-white/[0.03] p-3">
+                  <BeforeAfter
+                    beforeSrc={beforeSrc}
+                    afterSrc={afterSrc}
+                    beforeAlt="Generated proof before image preview"
+                    afterAlt="Generated proof after image preview"
+                  />
+                  <div className="mt-3 rounded-md border border-white/10 bg-ink p-3">
+                    <p className="text-sm font-semibold text-white">{values.businessName || "Your detailing business"} proof page preview</p>
+                    <p className="mt-2 text-xs leading-5 text-steel">
+                      {values.serviceType || "Detailing service"} in {values.jobLocation || "your service area"} with job notes, before/after photos, and a booking-ready CTA.
+                    </p>
+                  </div>
+                </div>
+
+                <Link href={featuredProofPath} className="inline-flex items-center justify-center gap-2 rounded-md bg-gold px-4 py-3 text-sm font-semibold text-ink hover:bg-gold-soft">
+                  View proof page
+                  <ArrowRight className="size-4" aria-hidden="true" />
+                </Link>
               </div>
-              <div className="relative aspect-[4/3] overflow-hidden rounded-md">
-                <Image src={afterSrc} alt="Generated proof after image preview" fill className="object-cover" unoptimized={afterIsUpload} sizes="(min-width: 1024px) 25vw, 50vw" />
-              </div>
+            </article>
+
+            <div className="rounded-lg border border-white/10 bg-white/[0.03] p-4">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">Bonus: copy-ready posts and review requests</p>
+              <p className="mt-2 text-sm leading-6 text-steel">
+                These are secondary outputs you can copy after the visual proof page is ready.
+              </p>
             </div>
+
             {outputs.map((output) => (
               <article key={output.title} className="rounded-lg border border-white/10 bg-ink p-4 shadow-[0_18px_50px_rgba(0,0,0,0.18)]">
                 <div className="flex items-start justify-between gap-3">
@@ -263,7 +297,7 @@ export function DemoClient() {
             <div className="rounded-lg border border-white/10 bg-white/[0.03] p-4">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">Next step</p>
               <p className="mt-2 text-sm leading-6 text-steel">
-                This is the core loop: finished job in, proof assets out. Check the sample proof page, then request early access if this would save time after real jobs.
+                This is the core loop: finished job in, visual proof page first, supporting copy underneath. Request early access if this would save time after real jobs.
               </p>
               <div className="mt-4 grid gap-2 sm:grid-cols-2">
                 <Link href={featuredProofPath} className="inline-flex items-center justify-center gap-2 rounded-md bg-gold px-4 py-3 text-sm font-semibold text-ink hover:bg-gold-soft">

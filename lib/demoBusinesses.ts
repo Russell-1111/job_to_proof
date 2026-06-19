@@ -31,7 +31,7 @@ export const demoBusinesses: Partial<Record<string, DemoBusiness>> = {
       'A sample interior detail page showing the kind of before/after proof a mobile detailer could send when a new lead asks, "Can I see your work?"',
     featureItems: ["Before/after photos", "What was cleaned", "Easy next step"],
     demoNote:
-      "This is demo proof content, not a customer case study. A real page would use the detailer's own job photos, actual service notes, Google review link, and booking link.",
+      "Real shared pages should use the detailer's own job photos, actual service notes, Google review link, and booking link.",
     heroImages: detailImages.footwell,
     jobs: [
       {
