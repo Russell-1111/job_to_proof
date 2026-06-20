@@ -86,6 +86,13 @@ export function buildOutputs(values: DemoFormValues): OutputCard[] {
       use: "Use as a quick filming plan for Reels, Shorts, or TikTok."
     },
     {
+      title: "Facebook/local post",
+      channel: "Local post",
+      text: `${service} completed in ${location}. This job focused on ${description} If your vehicle needs the same reset, message ${business} and ask for the next available mobile appointment.`,
+      why: "Turns the finished job into a local trust post with plain service context and a direct booking cue.",
+      use: "Post in a local Facebook page, business page, or neighborhood group where self-promotion is allowed."
+    },
+    {
       title: "Google review request",
       channel: "Review request",
       text: `Hi, thanks again for choosing ${business} for your ${service}. If the interior feels fresh and the service was helpful, would you mind leaving a quick Google review here? ${reviewLink}\n\nBefore sending, replace your-google-review-link with your own Google review link.`,
@@ -93,11 +100,11 @@ export function buildOutputs(values: DemoFormValues): OutputCard[] {
       use: "Send manually after the customer has seen the finished vehicle."
     },
     {
-      title: "Proof page summary",
-      channel: "Shareable page",
-      text: `${business} completed a ${service} in ${location} for a ${customer.toLowerCase()}. The job included ${description} The finished interior gives future customers a clear look at the result before they book.`,
-      why: "Turns a single completed job into a shareable page for booking conversations.",
-      use: "Send when a new lead asks to see examples of your work."
+      title: "SMS/WhatsApp-style review request",
+      channel: "Review request",
+      text: `Thanks again for booking ${business}. Hope the ${service.toLowerCase()} is feeling fresh. If you have 30 seconds, a quick review here would help us a lot: ${reviewLink}`,
+      why: "Keeps the ask short enough for a text thread while still connecting it to the completed job.",
+      use: "Send manually by SMS, WhatsApp, or DM after the customer has picked up the vehicle."
     }
   ];
 }

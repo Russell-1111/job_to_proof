@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ArrowRight, CheckCircle2, ClipboardCheck, FileText, MessageSquareText, Play, Quote, Share2, Sparkles } from "lucide-react";
+import { HomeFastPassForm } from "@/app/HomeFastPassForm";
 import { BeforeAfter } from "@/components/BeforeAfter";
 import { PageShell } from "@/components/PageShell";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -41,7 +42,7 @@ const previews = [
   }
 ];
 
-const proofStats = ["Social caption", "Review ask", "Proof page"];
+const proofStats = ["Proof page", "Before/after", "Bonus copy"];
 
 export default function HomePage() {
   return (
@@ -57,14 +58,14 @@ export default function HomePage() {
               Turn every finished detailing job into proof that helps win the next customer.
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-8 text-steel">
-              JobToProof turns before/after photos and a short job summary into ready-to-copy posts, review asks, and a shareable proof page.
+              JobToProof turns before/after photos and a short job summary into a shareable proof page first, with ready-to-copy posts and review asks as bonus assets.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Link href="/demo" className="inline-flex items-center justify-center gap-2 rounded-md bg-gold px-5 py-3.5 font-semibold text-ink shadow-glow hover:bg-gold-soft">
                 Try the sample demo
                 <ArrowRight className="size-4" aria-hidden="true" />
               </Link>
-              <Link href="/early-access" className="inline-flex items-center justify-center rounded-md border border-white/15 px-5 py-3.5 font-semibold text-white hover:border-gold/60">
+              <Link href="#early-access-fast-pass" className="inline-flex items-center justify-center rounded-md border border-white/15 px-5 py-3.5 font-semibold text-white hover:border-gold/60">
                 Request early access
               </Link>
             </div>
@@ -82,11 +83,13 @@ export default function HomePage() {
             <div className="mt-3 rounded-md border border-gold/20 bg-gold/10 p-4">
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold">Sample job becomes</p>
               <p className="mt-2 text-sm leading-6 text-white">
-                A short-form post idea, a review request message, and a proof page a detailer can send to the next lead.
+                A proof page a detailer can send to the next lead, plus short-form post ideas and review requests.
               </p>
             </div>
           </div>
         </section>
+
+        <HomeFastPassForm />
 
         <section className="border-y border-white/10 bg-white/[0.03] px-4 py-14 sm:px-6">
           <SectionHeading title="The work is visible. The proof still gets missed.">

@@ -88,7 +88,7 @@ export default async function ProofPage({ params }: ProofPageProps) {
           </div>
         </section>
 
-        <section className="mt-6 rounded-lg border border-gold/25 bg-gold/10 p-5 sm:p-6">
+        <section className="surface mt-6 rounded-lg border border-white/10 bg-white/[0.03] p-5 sm:p-6">
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div>
               <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-gold">

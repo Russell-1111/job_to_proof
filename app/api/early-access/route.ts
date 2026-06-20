@@ -9,8 +9,12 @@ type LeadPayload = {
   social_link?: unknown;
   biggest_problem?: unknown;
   would_pay_20?: unknown;
+  selected_tier?: unknown;
+  source?: unknown;
   notes?: unknown;
 };
+
+type SelectedTier = "free_preview" | "premium_20";
 
 const requiredFields = [
   "name",
@@ -31,6 +35,10 @@ function optionalString(value: unknown) {
 
 function isValidEmail(email: string) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function selectedTier(value: unknown): SelectedTier {
+  return value === "free_preview" || value === "premium_20" ? value : "premium_20";
 }
 
 export async function POST(request: Request) {
@@ -58,8 +66,8 @@ export async function POST(request: Request) {
     business_type: asTrimmedString(payload.business_type),
     social_link: optionalString(payload.social_link),
     biggest_problem: asTrimmedString(payload.biggest_problem),
-    would_pay_20: optionalString(payload.would_pay_20),
-    source: "early_access",
+    would_pay_20: selectedTier(payload.selected_tier ?? payload.would_pay_20),
+    source: asTrimmedString(payload.source) === "homepage_fast_pass" ? "homepage_fast_pass" : "early_access",
     notes: optionalString(payload.notes)
   };
 
